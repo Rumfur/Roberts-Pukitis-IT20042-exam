@@ -30,18 +30,30 @@ export const player = reactive({
     getNowPlayingSongPreview() {
         return this.now_playing?.preview_url;
     },
-    getNextSong(){
-        //const index = this.playlist.findIndex(this.now_playing);
-        const index = 0; // remove
-        return this.playlist[index + 1];
+    getSongIndex(){
+        this.playlist.forEach((song,index) =>{
+            if(song.id == this.now_playing.id){
+                return index;
+            }
+        })
     },
-    getPreviousSong() {
-        // const index = this.playlist.findIndex(this.now_playing);//maybe add .id
-        const index = 0; // remove
-        if (this.playlist[index - 1] == null) {
+    getPlaylistLength(){
+        return this.playlist.length;
+    },
+    getNextSong(){
+        let index = this.getSongIndex();
+        if (index+1 >= this.getPlaylistLength()) {
             return false;
         } else {
-            return this.playlist[index - 1] 
+            return this.playlist[index + 1];
+        }
+    },
+    getPreviousSong() {
+        let index = this.getSongIndex();
+        if (index - 1 < 0) {
+            return false;
+        } else {
+            return this.playlist[index - 1];
         }
     },
     resetNowPlaying() {

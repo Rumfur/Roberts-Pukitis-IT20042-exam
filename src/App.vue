@@ -3,7 +3,6 @@
     export default {
         methods: {
             getAuthent() {
-                console.log("Stat is ", auth.is_authenticated)
                 return auth.is_authenticated;
             }
         }

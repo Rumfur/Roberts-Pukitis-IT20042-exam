@@ -1,6 +1,5 @@
 import { reactive } from 'vue'
-import router from '../router';
-//localStorage.is_authenticated = true;
+import router from '../router/index.js';
 
 export const auth = reactive({
     user: {
@@ -25,7 +24,6 @@ export const auth = reactive({
     },
     logout() {
         localStorage.clear();
-        localStorage.is_authenticated = false;
         this.is_authenticated = false;
         router.push('/login');
     },
