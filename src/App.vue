@@ -1,7 +1,18 @@
+<script>
+    import {auth} from "./data/auth.js";
+    export default {
+        methods: {
+            getAuthent() {
+                console.log("Stat is ", auth.is_authenticated)
+                return auth.is_authenticated;
+            }
+        }
+    }
+</script>
 <template>
-    <Header></Header>
+    <Header v-show="getAuthent()"></Header>
     <div id="section-body">
-        <nav id="nav-main" class="wrapper-navigation">
+        <nav id="nav-main" class="wrapper-navigation" v-show="getAuthent()">
             <ol>
                 <li>
                     <a href="/">SONGS</a>
@@ -16,7 +27,7 @@
         </nav>
         <router-view class="section-router"></router-view>
     </div>
-    <div id="section-player">
-        <AudioPlayer />
+    <div id="section-player" v-show="getAuthent()">
+        <AudioPlayer/>
     </div>
 </template>
